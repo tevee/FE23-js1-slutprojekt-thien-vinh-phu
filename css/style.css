@@ -9,6 +9,14 @@ body {
     background-color:#191922
 }
 
+ul, li {
+    list-style-type: none;
+}
+
+li {
+    margin-top: 0.4rem;
+}
+
 header {
     margin-top: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -66,14 +74,14 @@ header {
     color: grey;
 }
 
-#movies-dropdown {
+#moviesDropdown {
     position: relative;
     margin-left: 1rem;
     display: flex;
     align-items: center;
 }
 
-#movies-dropdown > h4 {
+#moviesDropdown > h4 {
     color: white;
     font-weight: 500
 }
@@ -104,16 +112,16 @@ header {
     background-color: #ddd;
 }
 
-#movies-dropdown:hover .m-dropdown-content {
+#moviesDropdown:hover .m-dropdown-content {
     display: block;
 }
 
-#movies-dropdown:hover, .m-dropdown-content > button:hover {
+#moviesDropdown:hover, .m-dropdown-content > button:hover {
     cursor: pointer;
 }
 
-#contentContainer {
-    margin-top: 2rem;
+.contentContainer {
+    margin: 2rem;
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
@@ -128,4 +136,11 @@ header {
 .content-card > h3, .content-card > p {
     font-weight: 500;
     margin-top: 0.4rem;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 2rem;
 }
