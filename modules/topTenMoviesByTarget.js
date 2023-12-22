@@ -17,9 +17,7 @@ export function moviesDropDown() {
             .then(displayTopTenMovies)
             .catch((error) => console.log(error))
         }
-        else {
-            displayUndefinedResult()
-        }
+        else displayUndefinedResult()
     
     })
 }

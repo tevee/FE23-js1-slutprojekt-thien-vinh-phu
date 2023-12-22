@@ -1,5 +1,5 @@
 import { fetchMoviesOrCelebs } from "./fetchAPI.js"
-import { displaySearchResult, removePrevSearchResult } from "./display.js"
+import { displaySearchResult, removePrevSearchResult, displayNoSearchResult, displayError } from "./display.js"
 
 export function searchForm() {
 
@@ -17,10 +17,13 @@ export function searchForm() {
 
         console.log(input);
         console.log(selectedOption);
-        
+
         fetchMoviesOrCelebs(input, selectedOption)
-        .then((result) => displaySearchResult(result,selectedOption))
-        .catch((error) => console.log(error))
+        .then((result) => {
+            if(input != '' && result.length > 0) displaySearchResult(result, selectedOption);
+            else displayNoSearchResult(input);
+        })
+        .catch((error) => displayError(error))
         
     })
 }

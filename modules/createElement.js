@@ -8,26 +8,28 @@ function createAndAppendElement(type, content, container) {
   return el;
 }
 
-function createContentCard() {
-    const movieCardEl = document.createElement("div");
-    movieCardEl.classList.add("content-card");
-    contentContainer.append(movieCardEl);
+function getContentContainerAndCreateContentCard() {
+    const contentContainerEl = document.querySelector("#contentContainer");
+    contentContainerEl.classList.add("contentContainer");
 
-    return movieCardEl
+    const contentCardEl = document.createElement("div");
+    contentCardEl.classList.add("content-card");
+    contentContainerEl.append(contentCardEl);
+
+    return contentCardEl;
 }
 
-export function createElementForTopTenMovies(movie, imgBaseUrl) {
-    const a = createContentCard()
+export function createElementForTopTenMovies(movie) {
+    const contentCardEl = getContentContainerAndCreateContentCard();
+    const imgBaseUrl = `https://image.tmdb.org/t/p/w300`;
 
-    createAndAppendElement("img", imgBaseUrl + movie.poster_path, a);
-    createAndAppendElement("h3", movie.title, a);
-    createAndAppendElement("p", movie.release_date, a);
+    createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
+    createAndAppendElement("h3", movie.title, contentCardEl);
+    createAndAppendElement("p", movie.release_date, contentCardEl);
 }
 
 export function createElementForMovieTitles(movie, imgBaseUrl) {
-  const contentCardEl = document.createElement("div");
-  contentCardEl.classList.add("content-card");
-  contentContainer.append(contentCardEl);
+    const contentCardEl = getContentContainerAndCreateContentCard();
 
   createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
   createAndAppendElement("h3", movie.title, contentCardEl);
@@ -36,13 +38,11 @@ export function createElementForMovieTitles(movie, imgBaseUrl) {
 }
 
 export function createElementForCelebrities(person, imgBaseUrl) {
-  const contentCardEl = document.createElement("div");
-  contentCardEl.classList.add("content-card");
-  contentContainer.append(contentCardEl);
+    const contentCardEl = getContentContainerAndCreateContentCard();
 
   createAndAppendElement("img", imgBaseUrl + person.profile_path, contentCardEl);
   createAndAppendElement("h3", person.name, contentCardEl);
-  createAndAppendElement("p", `Known for: ${person.known_for_department}`, contentCardEl);
+  createAndAppendElement("p", `Department: ${person.known_for_department}`, contentCardEl);
 
   const ulEl = createAndAppendElement("ul", "", contentCardEl);
 

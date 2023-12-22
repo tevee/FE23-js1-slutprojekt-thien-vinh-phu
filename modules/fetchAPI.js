@@ -13,9 +13,15 @@ export async function fetchTopTenMoviesBy(target) {
 
   const response = await fetch(url, options);
 
-  const movies = await response.json();
-
-  return movies.results;
+  if(response.ok) {
+    const movies = await response.json();
+    return movies.results;
+  }
+  else if(response.status === 404) {
+    if(target === 'top_rated') throw '404 top rated';
+    else if(target === 'popular') throw '404 popular';
+  }
+  else throw 'error';
 
 }
 
@@ -27,8 +33,14 @@ export async function fetchMoviesOrCelebs(input, selectedOption) {
 
   const response = await fetch(finalUrl, options);
   
-  const movies = await response.json();
-
-  return movies.results;
+  if(response.ok) {
+    const dataObj = await response.json();
+    return dataObj.results;
+  }
+  else if(response.status === 404) {
+    if(selectedOption === 'movie') throw '404 movie';
+    else if(selectedOption === 'person') throw '404 person';
+  }
+  else throw 'error';
 
 }
