@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
     <script type="module" src="./main.js"></script>
 
-    <script src="https://kit.fontawesome.com/0ba4f75289.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/0ba4f75289.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Font Awesome -->
     <title>Slutprojekt</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div id="navbar">
+      <div id="navbar">
+        <form id="searchForm">
+          <select name="movies" id="movies">
+            <option value="movie">Movie Title</option>
+            <option value="person">Celebrities</option>
+          </select>
+          <input type="text" placeholder="Search" required />
+          <button><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+        </form>
 
-            <form id="searchForm">
-                <select name="movies" id="movies">
-                    <option value="movie">Movie Title</option>
-                    <option value="person">Celebrities</option>
-                </select>
-                <input type="text" placeholder="Search">
-                <button><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
-            </form>
-            
-            <div id="moviesDropdown">
-                <h4>Movies</h4>
-                <div class="m-dropdown-content">
-                    <button value="top_rated">Top Rated</button>
-                    <button value="popular">Popular</button>
-                </div>
+        <div id="moviesDropdown">
+          <h4>Movie menu</h4>
+          <div class="m-dropdown-container">
+            <div class="m-dropdown-content">
+              <button id="topRated" value="top_rated">Top Rated</button>
+              <button id="popular" value="popular">Popular</button>
             </div>
-
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
         </div>
-
+      </div>
     </header>
     <main>
-        <div id="contentContainer" class="contentContainer">
-            
-        </div>
+      <div id="contentContainer" class="contentContainer"></div>
     </main>
-</body>
+  </body>
 </html>

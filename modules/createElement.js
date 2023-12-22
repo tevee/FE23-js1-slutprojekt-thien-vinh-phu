@@ -8,39 +8,43 @@ function createAndAppendElement(type, content, container) {
   return el;
 }
 
-function getContentContainerAndCreateContentCard() {
-    const contentContainerEl = document.querySelector("#contentContainer");
-    contentContainerEl.classList.add("contentContainer");
+function getAndCreateContentCardEl() {
+  const contentContainerEl = document.querySelector("#contentContainer");
+  contentContainerEl.classList.add("contentContainer");
 
-    const contentCardEl = document.createElement("div");
-    contentCardEl.classList.add("content-card");
-    contentContainerEl.append(contentCardEl);
+  const contentCardEl = document.createElement("div");
+  contentCardEl.classList.add("content-card");
+  contentContainerEl.append(contentCardEl);
 
-    return contentCardEl;
+  return contentCardEl;
 }
 
-export function createElementForTopTenMovies(movie) {
-    const contentCardEl = getContentContainerAndCreateContentCard();
-    const imgBaseUrl = `https://image.tmdb.org/t/p/w300`;
-
-    createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
-    createAndAppendElement("h3", movie.title, contentCardEl);
-    createAndAppendElement("p", movie.release_date, contentCardEl);
-}
-
-export function createElementForMovieTitles(movie, imgBaseUrl) {
-    const contentCardEl = getContentContainerAndCreateContentCard();
+export function createElementsForTopTenMovies(movie) {
+  const contentCardEl = getAndCreateContentCardEl();
+  const imgBaseUrl = `https://image.tmdb.org/t/p/w300`;
 
   createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
   createAndAppendElement("h3", movie.title, contentCardEl);
-  createAndAppendElement("p" ,movie.release_date, contentCardEl);
+  createAndAppendElement("p", movie.release_date, contentCardEl);
+}
+
+export function createElementsForMovieTitles(movie, imgBaseUrl) {
+  const contentCardEl = getAndCreateContentCardEl();
+
+  if (movie.poster_path !== null) createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
+  else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
+
+  createAndAppendElement("h3", movie.title, contentCardEl);
+  createAndAppendElement("p", movie.release_date, contentCardEl);
   createAndAppendElement("p", movie.overview, contentCardEl);
 }
 
-export function createElementForCelebrities(person, imgBaseUrl) {
-    const contentCardEl = getContentContainerAndCreateContentCard();
+export function createElementsForCelebrities(person, imgBaseUrl) {
+  const contentCardEl = getAndCreateContentCardEl();
 
-  createAndAppendElement("img", imgBaseUrl + person.profile_path, contentCardEl);
+  if (person.profile_path !== null) createAndAppendElement("img", imgBaseUrl + person.profile_path, contentCardEl);
+  else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
+
   createAndAppendElement("h3", person.name, contentCardEl);
   createAndAppendElement("p", `Department: ${person.known_for_department}`, contentCardEl);
 
@@ -48,9 +52,12 @@ export function createElementForCelebrities(person, imgBaseUrl) {
 
   person.known_for.forEach((obj) => {
     if (obj.media_type == "movie") {
-      createAndAppendElement("li", `${obj.media_type}: ${obj.title}`, ulEl);
+      const movieString = obj.media_type.charAt(0).toUpperCase() + obj.media_type.slice(1);
+      createAndAppendElement("li", `${movieString}: ${obj.title}`, ulEl);
+
     } else if (obj.media_type == "tv") {
-      createAndAppendElement("li", `${obj.media_type}: ${obj.name}`, ulEl);
+      const tvString = obj.media_type.toUpperCase();
+      createAndAppendElement("li", `${tvString}: ${obj.name}`, ulEl);
     }
   });
 }
