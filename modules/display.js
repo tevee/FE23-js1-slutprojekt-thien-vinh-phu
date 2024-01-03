@@ -1,9 +1,9 @@
 import { createElementsForMovieTitles, createElementsForCelebrities, createElementsForTopTenMovies } from "./createElement.js";
 
 export function displayTopTenMovies(movieArr) {
-  const topTenPopularMovies = movieArr.slice(0, 10);
+  const topTenMovies = movieArr.slice(0, 10);
 
-  topTenPopularMovies.forEach((movie) => {
+  topTenMovies.forEach((movie) => {
     createElementsForTopTenMovies(movie);
   });
 }
@@ -26,10 +26,24 @@ export function displaySearchResult(objResultArr, selectedOption) {
   }
 }
 
+export function displaySortedList(obj, sortedArr) {
+  if(obj.target === 'top_rated' || obj.target === 'popular') displayTopTenMovies(sortedArr)
+  else if(obj.target === 'movie') displaySearchResult(sortedArr, 'movie')
+  else if(obj.target === 'person') displaySearchResult(sortedArr, 'person')
+}
+
+export function displaySearchInput(input) {
+  const h2El = document.querySelector('main > h2');
+  h2El.innerText = `Search: ${input}`
+}
+
 export function removePrevSearchResult() {
   const contentContainer = document.querySelector("#contentContainer");
+  const searchInputEl = document.querySelector('main > h2');
+
   contentContainer.innerHTML = "";
   contentContainer.classList.remove("error");
+  searchInputEl.innerText = '';
 }
 
 export function displayError(error, input) {

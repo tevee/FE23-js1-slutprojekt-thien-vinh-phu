@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="#" type="image/x-icon" />
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="./lib/anime.min.js" defer></script> <!-- funkar -->
     <script type="module" src="./main.js"></script>
-
-    <script
-      src="https://kit.fontawesome.com/0ba4f75289.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/0ba4f75289.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
     <title>Slutprojekt</title>
   </head>
   <body>
     <header>
       <div id="navbar">
+        <a href="index.html">Reset</a>
         <form id="searchForm">
           <select name="movies" id="movies">
             <option value="movie">Movie Title</option>
             <option value="person">Celebrities</option>
           </select>
           <input type="text" placeholder="Search" required />
+          <div class="dotContainer">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
           <button><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
         </form>
 
@@ -39,6 +41,16 @@
       </div>
     </header>
     <main>
+      <div class="sort-container">
+        <label for="sortDropdown">Sort by</label>
+        <select id="sortDropdown">
+          <option value="">Select option</option>
+          <option value="alphabetical">Alphabetical</option>
+          <option value="release-date">Release Date</option>
+        </select>
+        <button><img src="./images/sort-icon.svg" alt="sort icon"></button>
+      </div>
+      <h2></h2>
       <div id="contentContainer" class="contentContainer"></div>
     </main>
   </body>

@@ -54,8 +54,8 @@ export function createElementsForCelebrities(person, imgBaseUrl) {
     if (obj.media_type == "movie") {
       const movieString = obj.media_type.charAt(0).toUpperCase() + obj.media_type.slice(1);
       createAndAppendElement("li", `${movieString}: ${obj.title}`, ulEl);
-
-    } else if (obj.media_type == "tv") {
+    }
+    else if (obj.media_type == "tv") {
       const tvString = obj.media_type.toUpperCase();
       createAndAppendElement("li", `${tvString}: ${obj.name}`, ulEl);
     }
