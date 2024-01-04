@@ -19,6 +19,13 @@ function getAndCreateContentCardEl() {
   return contentCardEl;
 }
 
+function getAndCreateRecommendationBtn(appendTo) {
+  const recommendationBtn = createAndAppendElement("button", 'Recommendation', appendTo);
+  recommendationBtn.classList.add('button-recommendation');
+
+  return recommendationBtn;
+}
+
 export function createElementsForTopTenMovies(movie) {
   const contentCardEl = getAndCreateContentCardEl();
   const imgBaseUrl = `https://image.tmdb.org/t/p/w300`;
@@ -26,6 +33,10 @@ export function createElementsForTopTenMovies(movie) {
   createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
   createAndAppendElement("h3", movie.title, contentCardEl);
   createAndAppendElement("p", movie.release_date, contentCardEl);
+  const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+  recommendationBtn.id = movie.id;
+  recommendationBtn.value = 'movieId';
+
 }
 
 export function createElementsForMovieTitles(movie, imgBaseUrl) {
@@ -37,6 +48,9 @@ export function createElementsForMovieTitles(movie, imgBaseUrl) {
   createAndAppendElement("h3", movie.title, contentCardEl);
   createAndAppendElement("p", movie.release_date, contentCardEl);
   createAndAppendElement("p", movie.overview, contentCardEl);
+  const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+  recommendationBtn.id = movie.id;
+  recommendationBtn.value = 'movieId';
 }
 
 export function createElementsForCelebrities(person, imgBaseUrl) {
@@ -71,5 +85,33 @@ export function createElementsForTV(tv, imgBaseUrl) {
   createAndAppendElement("h3", tv.name, contentCardEl);
   createAndAppendElement("p", tv.first_air_date, contentCardEl);
   createAndAppendElement("p", tv.overview, contentCardEl);
+  const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+  recommendationBtn.id = tv.id;
+  recommendationBtn.value = 'seriesId';
 
+}
+
+export function createElementsForRecommendation(mediaType) {
+  const contentCardEl = getAndCreateContentCardEl();
+  let imgBaseUrl = `https://image.tmdb.org/t/p/w500`;
+
+  if (mediaType.poster_path !== null) createAndAppendElement("img", imgBaseUrl + mediaType.poster_path, contentCardEl);
+  else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
+
+  if(mediaType.media_type === 'movie') {
+    createAndAppendElement("h3", mediaType.title, contentCardEl);
+    createAndAppendElement("p", mediaType.release_date, contentCardEl);
+    createAndAppendElement("p", mediaType.overview, contentCardEl);
+    const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+    recommendationBtn.id = mediaType.id;
+    recommendationBtn.value = 'movieId';
+  }
+  else if(mediaType.media_type === 'tv') {
+    createAndAppendElement("h3", mediaType.name, contentCardEl);
+    createAndAppendElement("p", mediaType.first_air_date, contentCardEl);
+    createAndAppendElement("p", mediaType.overview, contentCardEl);
+    const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+    recommendationBtn.id = mediaType.id;
+    recommendationBtn.value = 'seriesId';
+  }
 }

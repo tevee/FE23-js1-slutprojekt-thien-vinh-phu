@@ -1,4 +1,4 @@
-import { createElementsForMovieTitles, createElementsForCelebrities, createElementsForTV, createElementsForTopTenMovies } from "./createElement.js";
+import { createElementsForRecommendation, createElementsForMovieTitles, createElementsForCelebrities, createElementsForTV, createElementsForTopTenMovies } from "./createElement.js";
 
 const sortContainerDivEl = document.querySelector('.sort-container')
 
@@ -6,9 +6,7 @@ export function displayTopTenMovies(movieArr) {
   const topTenMovies = movieArr.slice(0, 10);
   sortContainerDivEl.style.display = 'flex';
 
-  topTenMovies.forEach((movie) => {
-    createElementsForTopTenMovies(movie);
-  });
+  topTenMovies.forEach((movie) => createElementsForTopTenMovies(movie))
 }
 
 export function displaySearchResult(objResultArr, selectedOption) {
@@ -18,23 +16,23 @@ export function displaySearchResult(objResultArr, selectedOption) {
   if (selectedOption == "movie") {
     imgBaseUrl = `https://image.tmdb.org/t/p/w500`;
 
-    objResultArr.forEach((movie) => {
-      createElementsForMovieTitles(movie, imgBaseUrl);
-    });
+    objResultArr.forEach((movie) => createElementsForMovieTitles(movie, imgBaseUrl))
   }
   else if (selectedOption == "person") {
     imgBaseUrl = `https://image.tmdb.org/t/p/h632`;
 
-    objResultArr.forEach((person) => {
-      createElementsForCelebrities(person, imgBaseUrl);
-    });
+    objResultArr.forEach((person) => createElementsForCelebrities(person, imgBaseUrl))
   }
   else if (selectedOption == 'tv') {
     imgBaseUrl = `https://image.tmdb.org/t/p/w500`;
-    objResultArr.forEach(tv => {
-      createElementsForTV(tv, imgBaseUrl)
-    })
+    objResultArr.forEach(tv => createElementsForTV(tv, imgBaseUrl))
   }
+}
+
+export function displayRecommendationResult(mediaTypeArr) {
+  sortContainerDivEl.style.display = 'flex';
+
+  mediaTypeArr.forEach(mediaType => createElementsForRecommendation(mediaType))
 }
 
 export function displaySortedList(obj, sortedArr) {
@@ -43,6 +41,7 @@ export function displaySortedList(obj, sortedArr) {
   else if(obj.target === 'movie') displaySearchResult(sortedArr, 'movie')
   else if(obj.target === 'person') displaySearchResult(sortedArr, 'person')
   else if(obj.target === 'tv') displaySearchResult(sortedArr, 'tv')
+  else if(obj.target === 'movieId' || obj.target === 'seriesId') displayRecommendationResult(sortedArr)
 }
 
 export function displaySearchInput(input) {
@@ -53,11 +52,9 @@ export function displaySearchInput(input) {
 export function removePrevSearchResult() {
   sortContainerDivEl.style.display = 'none';
   const contentContainer = document.querySelector("#contentContainer");
-  const searchInputEl = document.querySelector('main > h2');
 
   contentContainer.innerHTML = "";
   contentContainer.classList.remove("error");
-  searchInputEl.innerText = '';
 }
 
 export function displayError(error, input) {

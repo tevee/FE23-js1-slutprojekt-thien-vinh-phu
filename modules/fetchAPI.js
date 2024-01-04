@@ -15,12 +15,14 @@ export async function fetchMoviesOrCelebsByType(type, input='', id) {
   else if(type === 'top_rated') url = `https://api.themoviedb.org/3/movie/${type}`;
   else if(type === 'popular') url = `https://api.themoviedb.org/3/movie/${type}`;
   else if(type === 'tv') url = `https://api.themoviedb.org/3/search/${type}?query=${input}&include_adult=false&language=en-US&page=1'`;
+  else if(type === 'movieId') url = `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`
+  else if(type === 'seriesId') url = `https://api.themoviedb.org/3/tv/${id}/recommendations?language=en-US&page=1`
 
   const response = await fetch(url, options);
 
   const dataObj = await response.json();
 
   if (response.ok && dataObj.results.length > 0) return dataObj.results;
-  else if (dataObj.results.length === 0) throw "no result";
+  else if (dataObj.results.length === 0) throw 'no result';
   else throw "error";
 }

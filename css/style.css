@@ -234,3 +234,29 @@ main > h2 {
   background-color: hsl(360,80%,80%);
   border-radius: 5px;
 }
+
+.button-recommendation {
+  margin-top: 0.4rem;
+  background: #e62143;
+  border-radius: 999px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 6px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.button-recommendation:hover,
+.button-recommendation:focus {
+  opacity: .75;
+}
