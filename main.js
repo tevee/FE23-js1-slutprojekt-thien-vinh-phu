@@ -104,8 +104,3 @@ toggleSortOrderBtn.addEventListener('click', (event) => {
     displaySortedList(savedSearchResult, sortedArrOrder);
   }
 })
-
-/**
- * TODO
- * finslipa sort funktionen - för mycket upprepning av kod!
- * */

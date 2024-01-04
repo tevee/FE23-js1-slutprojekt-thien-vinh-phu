@@ -61,3 +61,15 @@ export function createElementsForCelebrities(person, imgBaseUrl) {
     }
   });
 }
+
+export function createElementsForTV(tv, imgBaseUrl) {
+  const contentCardEl = getAndCreateContentCardEl();
+
+  if (tv.profile_path !== null) createAndAppendElement("img", imgBaseUrl + tv.poster_path, contentCardEl);
+  else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
+
+  createAndAppendElement("h3", tv.name, contentCardEl);
+  createAndAppendElement("p", tv.first_air_date, contentCardEl);
+  createAndAppendElement("p", tv.overview, contentCardEl);
+
+}

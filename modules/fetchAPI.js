@@ -7,13 +7,14 @@ const options = {
   },
 };
 
-export async function fetchMoviesOrCelebsByType(type, input='') {
+export async function fetchMoviesOrCelebsByType(type, input='', id) {
   let url;
 
   if(type === 'movie') url = `https://api.themoviedb.org/3/search/${type}?query=${input}&include_adult=false&language=en-US&page=1`;
   else if(type === 'person') url = `https://api.themoviedb.org/3/search/${type}?query=${input}&include_adult=false&language=en-US&page=1`;
   else if(type === 'top_rated') url = `https://api.themoviedb.org/3/movie/${type}`;
   else if(type === 'popular') url = `https://api.themoviedb.org/3/movie/${type}`;
+  else if(type === 'tv') url = `https://api.themoviedb.org/3/search/${type}?query=${input}&include_adult=false&language=en-US&page=1'`;
 
   const response = await fetch(url, options);
 
