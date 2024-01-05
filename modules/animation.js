@@ -39,11 +39,11 @@ export function playDotAnimation() {
     })
 }
 
-const gridAnimation = {
+const searchAnimation = {
     targets: '#contentContainer',
     translateY: ['100vh', 0],
     duration: 1000,
     easing: 'easeOutCubic',
 }
 
-export {gridAnimation}
+export {searchAnimation}

@@ -35,10 +35,10 @@
  * Displayed recommendation has the same info as movies and tv-series
  */
 
-import {fetchMoviesOrCelebsByType} from "./modules/fetchAPI.js";
+import {fetchMediaTypeByTarget} from "./modules/fetchAPI.js";
 import {displayTopTenMovies, displaySearchResult, displaySortedList, displayRecommendationResult, displaySearchInput, removePrevSearchResult, displayError} from "./modules/display.js";
 import { sortByType, toggleSortOrder, resetSortDropdown } from "./modules/sort.js";
-import { playDotAnimation, gridAnimation } from "./modules/animation.js";
+import { playDotAnimation, searchAnimation } from "./modules/animation.js";
 
 const searchFormEl = document.querySelector("#searchForm");
 const moviesDropdownEl = document.querySelector("#moviesDropdown");
@@ -58,7 +58,7 @@ searchFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
   removePrevSearchResult();
   resetSortDropdown();
-  anime(gridAnimation);
+  anime(searchAnimation);
 
   const selectedOption = document.querySelector("#searchForm > select > option:checked").value;
   const releaseDateOptionEl = document.querySelector('#sortDropdown > option[value=release-date]')
@@ -74,7 +74,7 @@ searchFormEl.addEventListener("submit", (event) => {
 
   displaySearchInput(inputElValue);
   
-  fetchMoviesOrCelebsByType(selectedOption, inputElValue)
+  fetchMediaTypeByTarget(selectedOption, inputElValue)
   .then((result) => {
     savedSearchResult.target = selectedOption;
     savedSearchResult.resultsArr = result;
@@ -99,9 +99,9 @@ moviesDropdownEl.addEventListener("click", (event) => {
     removePrevSearchResult();
     searchResultEl.innerHTML = '';
     releaseDateOptionEl.disabled = false;
-    anime(gridAnimation);
+    anime(searchAnimation);
 
-    fetchMoviesOrCelebsByType(target)
+    fetchMediaTypeByTarget(target)
     .then(result => {
       savedSearchResult.target = target;
       savedSearchResult.resultsArr = result;
@@ -147,7 +147,7 @@ contentContainerEl.addEventListener('click', event => {
     const parentElOfRecommendationBtn = recommendationBtn.parentElement;
     const selectedMediaTypeNameEl = parentElOfRecommendationBtn.querySelector('h3')
 
-    fetchMoviesOrCelebsByType(recommendationBtn.value, '', recommendationBtn.id)
+    fetchMediaTypeByTarget(recommendationBtn.value, '', recommendationBtn.id)
     .then(mediaType => {
       removePrevSearchResult();
       resetSortDropdown();

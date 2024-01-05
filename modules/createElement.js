@@ -31,12 +31,13 @@ export function createElementsForTopTenMovies(movie) {
   const imgBaseUrl = `https://image.tmdb.org/t/p/w300`;
 
   createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
-  createAndAppendElement("h3", movie.title, contentCardEl);
-  createAndAppendElement("p", movie.release_date, contentCardEl);
+
   const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
   recommendationBtn.id = movie.id;
   recommendationBtn.value = 'movieId';
 
+  createAndAppendElement("h3", movie.title, contentCardEl);
+  createAndAppendElement("p", movie.release_date, contentCardEl);
 }
 
 export function createElementsForMovieTitles(movie, imgBaseUrl) {
@@ -44,13 +45,14 @@ export function createElementsForMovieTitles(movie, imgBaseUrl) {
 
   if (movie.poster_path !== null) createAndAppendElement("img", imgBaseUrl + movie.poster_path, contentCardEl);
   else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
+  
+  const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
+  recommendationBtn.id = movie.id;
+  recommendationBtn.value = 'movieId';
 
   createAndAppendElement("h3", movie.title, contentCardEl);
   createAndAppendElement("p", movie.release_date, contentCardEl);
   createAndAppendElement("p", movie.overview, contentCardEl);
-  const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
-  recommendationBtn.id = movie.id;
-  recommendationBtn.value = 'movieId';
 }
 
 export function createElementsForCelebrities(person, imgBaseUrl) {
@@ -82,13 +84,13 @@ export function createElementsForTV(tv, imgBaseUrl) {
   if (tv.profile_path !== null) createAndAppendElement("img", imgBaseUrl + tv.poster_path, contentCardEl);
   else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
 
-  createAndAppendElement("h3", tv.name, contentCardEl);
-  createAndAppendElement("p", tv.first_air_date, contentCardEl);
-  createAndAppendElement("p", tv.overview, contentCardEl);
   const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
   recommendationBtn.id = tv.id;
   recommendationBtn.value = 'seriesId';
 
+  createAndAppendElement("h3", tv.name, contentCardEl);
+  createAndAppendElement("p", tv.first_air_date, contentCardEl);
+  createAndAppendElement("p", tv.overview, contentCardEl);
 }
 
 export function createElementsForRecommendation(mediaType) {
@@ -99,19 +101,19 @@ export function createElementsForRecommendation(mediaType) {
   else createAndAppendElement("img", "./images/404-image.svg", contentCardEl);
 
   if(mediaType.media_type === 'movie') {
-    createAndAppendElement("h3", mediaType.title, contentCardEl);
-    createAndAppendElement("p", mediaType.release_date, contentCardEl);
-    createAndAppendElement("p", mediaType.overview, contentCardEl);
     const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
     recommendationBtn.id = mediaType.id;
     recommendationBtn.value = 'movieId';
+    createAndAppendElement("h3", mediaType.title, contentCardEl);
+    createAndAppendElement("p", mediaType.release_date, contentCardEl);
+    createAndAppendElement("p", mediaType.overview, contentCardEl);
   }
   else if(mediaType.media_type === 'tv') {
-    createAndAppendElement("h3", mediaType.name, contentCardEl);
-    createAndAppendElement("p", mediaType.first_air_date, contentCardEl);
-    createAndAppendElement("p", mediaType.overview, contentCardEl);
     const recommendationBtn = getAndCreateRecommendationBtn(contentCardEl);
     recommendationBtn.id = mediaType.id;
     recommendationBtn.value = 'seriesId';
+    createAndAppendElement("h3", mediaType.name, contentCardEl);
+    createAndAppendElement("p", mediaType.first_air_date, contentCardEl);
+    createAndAppendElement("p", mediaType.overview, contentCardEl);
   }
 }

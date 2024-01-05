@@ -66,6 +66,7 @@ export function displayError(error, input) {
   let message;
   
   if (error === "no result") message = `Nothing was found when searching for ${input}...`;
+  else if(error === 'no recommendation') message = 'No recommendations were found...'
   else message = "Something went wrong please try again later...";
 
 contentContainer.innerText = message;

@@ -7,7 +7,7 @@ const options = {
   },
 };
 
-export async function fetchMoviesOrCelebsByType(type, input='', id) {
+export async function fetchMediaTypeByTarget(type, input='', id) {
   let url;
 
   if(type === 'movie') url = `https://api.themoviedb.org/3/search/${type}?query=${input}&include_adult=false&language=en-US&page=1`;
@@ -20,9 +20,10 @@ export async function fetchMoviesOrCelebsByType(type, input='', id) {
 
   const response = await fetch(url, options);
 
-  const dataObj = await response.json();
-
-  if (response.ok && dataObj.results.length > 0) return dataObj.results;
-  else if (dataObj.results.length === 0) throw 'no result';
+  const mediaTypeObj = await response.json();
+  
+  if (response.ok && mediaTypeObj.results.length > 0) return mediaTypeObj.results;
+  else if(type === 'movieId' || type === 'seriesId' && mediaTypeObj.results.length === 0) throw 'no recommendation';
+  else if (mediaTypeObj.results.length === 0 ) throw 'no result';
   else throw "error";
 }
